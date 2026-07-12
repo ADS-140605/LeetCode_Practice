@@ -3,23 +3,15 @@ public:
     string removeDuplicates(string s) {
         if (s.empty()) return "";
         string ans ="";
-        int i=s.length()-1;
-        stack<char> st;
-        st.push(s[i]);
-        i--;
-        while(i>=0){
-            char crr=s[i];
-            if(!st.empty()&&(char)st.top()==crr){
-                st.pop();
+        ans.reserve(s.size());
+        for(char x:s | views::reverse){
+            if(!ans.empty() && ans.back()==x){
+                ans.pop_back();
             }else{
-                st.push(crr);
+                ans.push_back(x);
             }
-            i--;
         }
-        while(!st.empty()){
-            char x=st.top();st.pop();
-            ans.push_back(x);
-        }
+        ranges::reverse(ans);
         return ans;
     }
 };
