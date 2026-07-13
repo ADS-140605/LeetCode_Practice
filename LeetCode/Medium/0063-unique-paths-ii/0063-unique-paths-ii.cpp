@@ -28,11 +28,28 @@ public:
             }
         }
         return dp[m-1][n-1];
-
     }
+    int solve_space(int r,int c,int &m,int &n,vector<vector<int>>& g){
+        vector<int> prev(n,0);
+        prev[0]=(g[0][0]==1)?0:1;
+        for(int i=1;i<n;i++) prev[i]=(g[0][i]==1)?0:prev[i-1];
+        for(int i=1;i<m;i++){
+            vector<int> crr(n,0);
+            crr[0]=(g[i][0]==1)?0:prev[0];
+            for(int j=1;j<n;j++){
+                if(g[i][j]!=1) crr[j]=prev[j]+crr[j-1];
+                else{
+                    crr[j]=0;
+                }
+            }
+            prev=crr;
+        }
+        return prev[n-1];
+    }
+
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         memset(dp,-1,sizeof(dp));
         int m=obstacleGrid.size(),n=obstacleGrid[0].size();
-        return solve_tab(0,0,m,n,obstacleGrid);
+        return solve_space(0,0,m,n,obstacleGrid);
     }
 };
