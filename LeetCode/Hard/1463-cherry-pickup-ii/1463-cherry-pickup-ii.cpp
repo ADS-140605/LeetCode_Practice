@@ -49,6 +49,39 @@ public:
         return dp[0][0][n-1];
 
     }
+    int solve_space(vector<vector<int>>& grid){
+        int front [70][70];
+        int crr [70][70];
+        for(int j1=0;j1<=n-1;j1++){
+            for(int j2=0;j2<=n-1;j2++){
+                front[j1][j2]=(j1==j2)?grid[m-1][j1]:grid[m-1][j1]+grid[m-1][j2];
+            }
+        }
+        for(int i=m-2;i>=0;i--){
+            for(int j1=0;j1<=n-1;j1++){
+                for(int j2=0;j2<=n-1;j2++){
+                    int maxi=-1e8;;
+                    int cherries=(j1==j2)?grid[i][j1]:grid[i][j1]+grid[i][j2];
+                    for(int x=-1;x<=1;x++){
+                        for(int y=-1;y<=1;y++){
+                            if(j1+y >= 0 && j1+y < n && j2+x >= 0 && j2+x < n) {
+                                int cherries = (j1==j2) ? grid[i][j1] : grid[i][j1] + grid[i][j2];
+                                cherries += front[j1+y][j2+x];
+                                maxi = max(maxi, cherries);
+                            }
+                        }
+                    }
+                    crr[j1][j2]=maxi;
+                }
+            }
+            for(int j1=0; j1<n; j1++) {
+                for(int j2=0; j2<n; j2++) {
+                    front[j1][j2] = crr[j1][j2];
+                }
+            }
+        }
+        return front[0][n-1];
+    }
     int cherryPickup(vector<vector<int>>& grid) {
         m = grid.size();
         n = grid[0].size();
