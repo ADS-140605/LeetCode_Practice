@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[201][201];
+    // int dp[201][201];
     int n;
     int solve(vector<vector<int>>& triangle){
         vector<int> prev;
@@ -22,7 +22,7 @@ public:
     }
     int minimumTotal(vector<vector<int>>& triangle) {
         n=triangle.size();
-        memset(dp,-1,sizeof(dp));
+        // memset(dp,-1,sizeof(dp));
         return solve(triangle);
     }
 };
