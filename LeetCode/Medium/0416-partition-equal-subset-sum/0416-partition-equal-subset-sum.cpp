@@ -12,6 +12,7 @@ public:
         }
         for(int i=1;i<n;i++){
             vector<bool> crr(total_sum+1,0);
+            crr[0]=true;
             for(int t=1;t<=total_sum;t++){
                 bool included = (t-arr[i]>=0)? dp[t-arr[i]]:false;
                 bool excluded = dp[t];
