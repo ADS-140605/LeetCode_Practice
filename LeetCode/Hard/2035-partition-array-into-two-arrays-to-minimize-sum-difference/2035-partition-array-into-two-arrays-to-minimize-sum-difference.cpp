@@ -1,5 +1,5 @@
 class Solution {
-public:
+public://LEarn MEET IN THE MIDDLE technique
     int minimumDifference(vector<int>& nums) {
         int total_len=nums.size();
         int n=total_len/2;
