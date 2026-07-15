@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int gcd(int a,int b){
+        while(b!=0){
+            int temp=a%b;
+            a=b;
+            b=temp;
+        }
+        return a;
+    }
+    int findGCD(vector<int>& nums) {
+        int mn=INT_MAX,mx=INT_MIN;
+        for(const auto& x: nums){
+            if(x>mx) mx=x;
+            if(x<mn) mn=x;
+        }
+        return gcd(mn,mx);
+    }
+};
