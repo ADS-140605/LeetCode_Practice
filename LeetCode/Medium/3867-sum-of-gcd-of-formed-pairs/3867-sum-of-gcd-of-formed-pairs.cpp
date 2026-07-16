@@ -1,17 +1,16 @@
 class Solution {
 public:
     long long gcdSum(vector<int>& nums) {
-        vector<int> p;
         int mx=INT_MIN;
         for(int i=0;i<nums.size();i++){
             mx= max(nums[i],mx);
-            p.push_back(__gcd(mx,nums[i]));
+            nums[i]=(__gcd(mx,nums[i]));
         }
-        sort(p.begin(),p.end(),[](int a,int b){return a>b;});
+        sort(nums.begin(),nums.end());
         long long ans=0;
-        int r=p.size()-1;
-        for(int i=0;i<p.size()/2;i++){
-            ans+=__gcd(p[i],p[r]);
+        int r=nums.size()-1;
+        for(int i=0;i<nums.size()/2;i++){
+            ans+=__gcd(nums[i],nums[r]);
             r--;
         }
         return ans;
